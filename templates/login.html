@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<div class="container">
+		{% if error %}
+			<p class="alert alert-danger">{{ error }}</p>
+		{% endif %}
+		<form method="POST">
+			{% csrf_token %}
+			<div class="form-group">
+				<input class="form-control" type="text" name="usuario">
+				<input class="form-control" type="password" name="password">
+				<button class="btn btn-primary btn-block mt-5" type="submit">Entrar</button>
+			</div>
+			<a href="{% url 'registro' %}">crear cuenta ¿?</a>
+		</form>
+	</div>
+</body>
+</html>

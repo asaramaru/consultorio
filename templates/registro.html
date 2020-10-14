@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro</title>
+</head>
+<body>
+	<form method="POST">
+		{% if error %}
+			<p class="alert alert-danger" style="color: red;">{{ error }}</p>
+		{% endif %}
+		<div class="form-group">
+			{% csrf_token %}
+			<input class="form-control" type="text" name="usuario" placeholder="nombre usuario">
+			<input class="form-control" type="password" name="password" placeholder="contraseña">
+			<input class="form-control" type="password" name="password_confirmation" placeholder="contraseña">
+
+			<input class="form-control" type="text" name="nombre" placeholder="nombre">
+			<input class="form-control" type="text" name="apellido" placeholder="apellido">
+			<input class="form-control" type="email" name="email" placeholder="email">
+			
+			<button type="submit">Registro</button>
+
+		</div>
+	</form>
+</body>
+</html>
