@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.utils import IntegrityError
 
 # Create your views here.
 def pag_principal(request):
@@ -41,16 +42,21 @@ def registro(request):
 		password = request.POST['password']
 		password_confirmation = request.POST['password_confirmation']
 
+		if password != password_confirmation:
+			return render(request,'registro.html',{'error':'La contraseñas no coinciden'})
+
+		try:
+			user = User.objects.create_user(username=usuario, password=password)
+		except IntegrityError:
+			return render(request,'registro.html',{'error':'El usuario ya existe'})
+
 		nombre = request.POST['nombre']
 		apellido = request.POST['apellido']
 		email = request.POST['email']
-
-		user = User.objects.create_user(username=usuario, password=password, first_name=nombre, last_name=apellido, email=email)
-		user.is_admin=False
 		user.save()
 		return redirect('login')
 
-	return render(request,'registro.html',{'error':'las constraseñas no coinciden'})
+	return render(request,'registro.html')
 
 def recuperar_contraseña(request):
 	if request.method == 'POST':
@@ -63,6 +69,7 @@ def recuperar_contraseña(request):
 
 	return render(request, 'recuperar.html',{'error':'El usuario no existe'})
 
+@login_required
 def logout_view(request):
 	logout(request)
 	return redirect('login')

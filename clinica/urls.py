@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from centro import views
+from centro import views as views_centro
+from consultorio import views as views_consultorio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login_view, name='login'),
-    path('principal/', views.pag_principal, name='principal'),
-    path('logout/', views.logout_view, name='logout'),
-    path('registro/', views.registro, name='registro'),
-    path('recuperar/', views.recuperar_contraseña, name='contraseña'),
-    path('formulario/', views.formulario, name='formulario'),
+    path('login/', views_centro.login_view, name='login'),
+    path('principal/', views_centro.pag_principal, name='principal'),
+    path('logout/', views_centro.logout_view, name='logout'),
+    path('registro/', views_centro.registro, name='registro'),
+    path('recuperar/', views_centro.recuperar_contraseña, name='contraseña'),
+    path('formulario/', views_centro.formulario, name='formulario'),
+    path('pacientes/', views_consultorio.pacientes_view, name='lista_pacientes'),
 ]
