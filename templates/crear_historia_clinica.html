@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crear paciente</title>
+</head>
+<body>
+	<div>
+		<form method="POST">
+			{% csrf_token %}
+			<select>
+				{% for pacien in paciente %}
+					<option value="{{pacien.id}}">{{pacien.Nombre}} - {{pacien.Cedula}}</option>
+				{% endfor %}
+			</select>
+			<select>
+				{% for citas in cita %}
+					<option value="{{citas.id}}">{{citas.TipoCita}}</option>
+				{% endfor %}
+			</select>
+			<select>
+				{% for exam in examen %}
+					<option value="{{exam.id}}">{{exam.FechaExamen}}</option>
+				{% endfor %}
+			</select>
+			<button type="submit">Crear paciente</button>
+		</form>
+	</div>
+</body>
+</html>

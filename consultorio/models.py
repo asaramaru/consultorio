@@ -2,7 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Usuario(models.Model):
 
+	TIPO_USUARIO=(
+        ('Medico','Medico'),
+        ('Paciente','Paciente'),
+        ('Especialista','Especialista'),
+    )
+
+	Usuario = models.CharField(max_length=20)
+	Contraseña = models.CharField(max_length=20)
+
+	TipoUsuario = models.CharField(max_length=500, choices = TIPO_USUARIO, default='Medico')
+                                    	
+									
 class Medico(models.Model):
 
 	Nombre = models.CharField(max_length= 50)
@@ -29,19 +42,19 @@ class GrupoFamiliar(models.Model):
 	Titular = models.CharField(max_length=100)
 	IdMedico = models.ForeignKey(Medico, on_delete=models.CASCADE, verbose_name='Identificador del Medico')
 
-
 class Paciente(models.Model):
 
 	Nombre = models.CharField(max_length= 50)
 	Apellido = models.CharField(max_length= 50)
 	Cedula = models.IntegerField()
-	Correo = models.EmailField(blank=True)
+	Correo = models.EmailField()
 	TipoSangre = models.CharField(max_length= 10)
 	Telefono = models.CharField(max_length=15)
 	Celular = models.CharField(max_length=15)
 	FechaNacimiento = models.DateField()
-	Estrato = models.IntegerField(blank=True)
-	IdGrupoFamiliar = models.ForeignKey(GrupoFamiliar, on_delete=models.CASCADE, verbose_name='Identificador del Grupo Familiar')
+	Estrato = models.IntegerField()
+	IdGrupoFamiliar = models.ForeignKey(GrupoFamiliar, on_delete=models.CASCADE, verbose_name='Identificador del GrupoFamiliar')
+	
 
 	Created = models.DateTimeField(auto_now_add=True, blank=True)
 	Modified = models.DateTimeField(auto_now=True, blank=True)
@@ -51,13 +64,14 @@ class Paciente(models.Model):
 		return self.Nombre
 
 
+
 class Registro(models.Model):
 
 	Sintomas = models.CharField(max_length= 500)
 	Medicamentos = models.CharField(max_length= 500)
 	SignosVitales = models.CharField(max_length= 500)
 	Generacion = models.CharField(max_length= 500)
-	Incapacidades = models.CharField(max_length= 500, null=True)
+	Incapacitaciones = models.CharField(max_length= 500, null=True)
 	Remisiones = models.CharField(max_length= 500, null=True)
 	OrdenesMedicas = models.CharField(max_length= 500)
 
@@ -158,3 +172,6 @@ class CitaEspecialista(models.Model):
 
 	Created = models.DateTimeField(auto_now_add=True, blank=True)
 	Modified = models.DateTimeField(auto_now=True, blank=True)
+
+
+

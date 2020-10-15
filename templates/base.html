@@ -6,7 +6,12 @@
 </head>
 <body>
 	{% include "nav.html" %}
+	
+	<form action="{% url 'lista_pacientes' %}" method="GET">
+		<input type="text" name="paciente">
+		<input type="submit" name="buscar">
+	</form>
 	{% block contenido %}{% endblock %}
-	<button name="logout">salir</button>
+	<button name="logout"><a href="{% url 'logout' %}">salir</a></button>
 </body>
 </html>

@@ -27,4 +27,13 @@ urlpatterns = [
     path('recuperar/', views_centro.recuperar_contraseña, name='contraseña'),
     path('formulario/', views_centro.formulario, name='formulario'),
     path('pacientes/', views_consultorio.pacientes_view, name='lista_pacientes'),
+    path('pacientes/crear/', views_consultorio.crear_paciente, name='crear_pacientes'),
+    path('grupofamiliar/crear/', views_consultorio.crear_grupo_familiar, name='crear_grupo_familiar'),
+    path('medico/crear/', views_consultorio.crear_medico, name='crear_medico'),
+    path('registro/crear/', views_consultorio.crear_registro, name='crear_registro'),
+    path('laboratorio/crear/', views_consultorio.crear_laboratorio, name='crear_laboratorio'),
+    path('examen/crear/', views_consultorio.crear_examen, name='crear_examen'),
+    path('especialista/cita/', views_consultorio.cita_especilista, name='cita_especialista'),
+    path('cita/crear/', views_consultorio.crear_cita, name='crear_cita'),
+    path('historiaclinica/crear/', views_consultorio.crear_historia_clinica, name='crear_historia_clinica'),
 ]

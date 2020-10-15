@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db.utils import IntegrityError
+from django.conf import settings
+from centro.forms import FormularioContacto
 
 # Create your views here.
 def pag_principal(request):
@@ -11,16 +13,24 @@ def pag_principal(request):
 
 def formulario(request):
 	if request.method == 'POST':
+		formulariop = FormularioContacto(request.POST)
+		if formulariop.is_valid():
+			datos = formulariop.cleaned_data
+			send_mail(datos['nombre'],datos['mensaje'],datos.get('email',''),['suppordani@gmail.com'])
+			return render(request,'formulario.html',{'mensaje':'Tu formulario a sido enviado con exito'})
+	else:
+		formulariop = FormularioContacto()
+
+	return render(request,'formulario.html')
+
+	'''if request.method == 'POST':
 		nombre = request.POST['nombre']
 		mensaje = request.POST['mensaje']
 		email = request.POST['email']
+		email_de = settings.EMAIL_HOST_USER
+		send_mail(nombre,mensaje,email,[email_de])
 
-		if nombre and mensaje and email:
-			send_mail(nombre,mensaje,email,['suppordani@gmail.com'])
-		else:
-			return render(request,'formulario.html',{'error':'Se te ha olvidado llenar un campo'})
-
-	return render(request,'formulario.html')
+	return render(request,'formulario.html')'''
 
 def login_view(request):
 	if request.method == 'POST':

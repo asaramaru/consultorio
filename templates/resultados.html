@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block titulo %}
+	<title>Resultados de la busqueda</title>
+{% endblock %}
+
+{% block contenido %}
+	<p>Estas buscando: <strong>{{query}}</strong></p>
+	{% if paciente %}
+		<p>Articulos encontrados: {{ paciente|length}} pacientes</p>
+		<ul>
+			{% for pacientes in paciente %}
+				<li>
+					{{ pacientes.nombre }} &nbsp: {{ pacientes.IdGrupoFamiliar}} &nbsp: {{ pacientes.cedula}} 
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No se encuentra el paciente buscado</p>
+	{% endif %}
+{% endblock %}

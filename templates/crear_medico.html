@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crear paciente</title>
+</head>
+<body>
+	<div>
+		<form method="POST">
+			{% csrf_token %}
+			<input type="text" name="nombre" placeholder="nombre">
+			<input type="text" name="apellido" placeholder="apellido">
+			<input type="number" name="cedula" placeholder="cedula">
+			<input type="email" name="correo" placeholder="correo">
+			<input type="text" name="tipoSangre" placeholder="tipoSangre">
+			<input type="number" name="telefono" placeholder="telefono">
+			<input type="number" name="celular" placeholder="celular">
+			<input type="text" name="fechaNacimiento" placeholder="fechaNacimiento">
+
+			<button type="submit">Crear paciente</button>
+		</form>
+	</div>
+</body>
+</html>
