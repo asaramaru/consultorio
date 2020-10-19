@@ -16,7 +16,7 @@ def formulario(request):
 		formulariop = FormularioContacto(request.POST)
 		if formulariop.is_valid():
 			datos = formulariop.cleaned_data
-			send_mail(datos['nombre'],datos['mensaje'],datos.get('email',''),['suppordani@gmail.com'])
+			send_mail(datos['nombre'],datos['mensaje'],datos.get('email',''),[''])
 			return render(request,'formulario.html',{'mensaje':'Tu formulario a sido enviado con exito'})
 	else:
 		formulariop = FormularioContacto()
